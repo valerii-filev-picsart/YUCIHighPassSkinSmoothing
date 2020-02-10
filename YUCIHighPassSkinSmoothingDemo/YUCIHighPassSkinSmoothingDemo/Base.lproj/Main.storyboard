@@ -182,7 +182,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HOg-dR-dJ7">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Choose image" id="XXS-D6-Qvn">
+                        <barButtonItem key="rightBarButtonItem" title="Save image" id="XXS-D6-Qvn">
                             <connections>
                                 <action selector="chooseImage:" destination="46C-mi-jaP" id="ZI9-vr-M68"/>
                             </connections>

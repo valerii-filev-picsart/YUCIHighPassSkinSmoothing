@@ -52,10 +52,12 @@ class DrawViewController: UIViewController, GLKViewDelegate, UIImagePickerContro
     }
     
     @IBAction func chooseImage(_ sender: Any) {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.view.backgroundColor = UIColor.white
-        imagePickerController.delegate = self
-        self.present(imagePickerController, animated: true, completion: nil)
+//        let imagePickerController = UIImagePickerController()
+//        imagePickerController.view.backgroundColor = UIColor.white
+//        imagePickerController.delegate = self
+//        self.present(imagePickerController, animated: true, completion: nil)
+//        saveImage(image: glView.snapshot, name: "smooth_result.png")
+        UIImageWriteToSavedPhotosAlbum(glView.snapshot, nil, nil, nil)
     }
         
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -66,7 +68,8 @@ class DrawViewController: UIViewController, GLKViewDelegate, UIImagePickerContro
         self.dismiss(animated: true, completion: nil)
             
         if let image = info[.originalImage] as? UIImage {
-            self.inputCIImage = CIImage(cgImage: image.cgImage!).oriented(forExifOrientation: Int32(CGImagePropertyOrientation.up.rawValue))
+            self.inputCIImage = CIImage(cgImage: image.cgImage!).oriented(forExifOrientation: Int32(image.imageOrientation.rawValue))
+            filter = YUCIHighPassSkinSmoothing()
             reset()
             self.glView.display()
         }
